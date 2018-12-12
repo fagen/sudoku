@@ -1,6 +1,6 @@
 ////空格加入计算
-////5.4s-5.8s
-////puts
+////5.2-5.5s
+////fputs
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -20,30 +20,31 @@ void sudoku_generate(int n)
 {
 	char str[30];
 	char line[9] = { '5','1','2','3','4','6','7','8','9' };
-	char line1[18] = { '5',' ','1', ' ' ,'2', ' ','3',' ','4', ' ','6',' ','7',' ','8',' ','9','\0' };
+	char line1[19] = { '5',' ','1', ' ' ,'2', ' ','3',' ','4', ' ','6',' ','7',' ','8',' ','9','\n','\0' };
 	int shift[9] = { 0,6,12,2,8,14,4,10,16 };
-	int pos[10] = { 0,1,2,3,4,5,6,7,8,9 };//行的输出顺序
 
 	int pos1[6][3] = { { 3,4,5 },{ 3,5,4 },{ 4,5,3 },{ 4,3,5 },{ 5,4,3 },{ 5,3,4 } };
 	int pos2[6][3] = { { 6,7,8 },{ 6,8,7 },{ 7,6,8 },{ 7,8,6 },{ 8,6,7 },{ 8,7,6 } };
 
-	//char final[9][9];
-	char final[9][18];
+
+	char final[10][19];
 	int i, j, k;
 	int flag = 0;
 
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; i++)//初始值置空格和\0
 	{
 		for (int j = 0; j < 17; j++)
 		{
 			final[i][j] = ' ';
 		}
-		final[i][17] = '\0';
+		final[i][17] = '\n';
+		final[i][18] = '\0';
 	}
+	final[9][0] = '\n';//第10行只有一个空行
+	final[9][1] = '\0';
 
-
-	freopen(SUDOKUPATH, "w", stdout);
-	//FILE *fp = fopen(SUDOKUPATH, "w");
+	//freopen(SUDOKUPATH, "w", stdout);
+	FILE *fp = fopen(SUDOKUPATH, "w");
 
 	do//生成第一行
 	{
@@ -65,39 +66,39 @@ void sudoku_generate(int n)
 		{
 			for (j = 0; j < 6; j++)
 			{
-				if (flag)putchar('\n');
 				flag++;
 				for (k = 0; k < 3; k++)//前三行
 				{
-
-					puts(final[k]);
-					//fputs(final[k], fp);
+					fputs(final[k], fp);
+					//fclose(fp);
+					//return;
 				}
 
-				for (k = 0; k < 3; k++)
+				for (k = 0; k < 3; k++)//3 4 5行
 				{
-
-					puts(final[pos1[i][k]]);
-					//fputs(final[pos1[i][k]],fp);
+					fputs(final[pos1[i][k]], fp);
 				}
-				for (k = 0; k < 3; k++)
+				if (n > 1)
 				{
-
-
-					if (n == 1 && k == 2)
+					for (k = 0; k < 3; k++)
 					{
-						for (int t = 0; t < 17; t++)
-							putchar(final[pos2[j][k]][t]);
-						//fputs(final[pos2[j][k]][t],fp)
+						fputs(final[pos2[j][k]], fp);
 					}
-					else
+					fputs(final[9], fp);//输出回车
+				}
+				else
+				{
+					for (k = 0; k < 2; k++)
 					{
-						puts(final[pos2[j][k]]);
-						//fputs(final[pos2[j][k]], fp);
+						fputs(final[pos2[j][k]], fp);
+					}
+					for (k = 0; k < 17; k++)
+					{
+						fputc(final[pos2[j][3]][k], fp);
 					}
 				}
 				n--;
-				if (!n) { return; }
+				if (!n) { fclose(fp); return; }
 			}
 		}
 
@@ -283,8 +284,11 @@ int main(int argc, char** argv)
 	//freopen("test.txt","w",stdout);
 	sudoku_generate(num);
 	endtime = clock();	//计时结束
-	freopen("CON", "w", stdout);
+						//freopen("CON", "w", stdout);
 	printf("\nRunning Time：%dms\n", endtime - begintime);
 	system("pause");
 	return 0;
 }
+
+
+
