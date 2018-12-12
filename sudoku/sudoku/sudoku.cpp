@@ -1,4 +1,6 @@
-////////7s-8s
+////空格加入计算
+////5.4s-5.8s
+////puts
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -13,47 +15,50 @@ using namespace std;
 int num = 0;
 int settle_flag = 1;
 char ques_board[9][9];
+
 void sudoku_generate(int n)
 {
 	char str[30];
-	char line1[9] = { '5','1','2','3','4','6','7','8','9' };
-	int shift[9] = { 0,3,6,1,4,7,2,5,8 };
+	char line[9] = { '5','1','2','3','4','6','7','8','9' };
+	char line1[18] = { '5',' ','1', ' ' ,'2', ' ','3',' ','4', ' ','6',' ','7',' ','8',' ','9','\0' };
+	int shift[9] = { 0,6,12,2,8,14,4,10,16 };
 	int pos[10] = { 0,1,2,3,4,5,6,7,8,9 };//行的输出顺序
 
 	int pos1[6][3] = { { 3,4,5 },{ 3,5,4 },{ 4,5,3 },{ 4,3,5 },{ 5,4,3 },{ 5,3,4 } };
 	int pos2[6][3] = { { 6,7,8 },{ 6,8,7 },{ 7,6,8 },{ 7,8,6 },{ 8,6,7 },{ 8,7,6 } };
 
-	char final[9][9];
-	char final2[9][18];
+	//char final[9][9];
+	char final[9][18];
 	int i, j, k;
 	int flag = 0;
 
-	for (i = 0; i < 9; i++)//末尾加一个\0
+	for (int i = 0; i < 9; i++)
 	{
-		final2[i][17] = '\0';
+		for (int j = 0; j < 17; j++)
+		{
+			final[i][j] = ' ';
+		}
+		final[i][17] = '\0';
 	}
+
+
 	freopen(SUDOKUPATH, "w", stdout);
+	//FILE *fp = fopen(SUDOKUPATH, "w");
+
 	do//生成第一行
 	{
+		for (int i = 0; i < 9; i++)
+		{
+			line1[2 * i] = line[i];
+		}
 		memcpy(final[0], line1, sizeof(line1));
 		for (i = 1; i < 9; i++)//以第一行为基础，生成一个终局
 		{
-			for (j = 0; j < 9; j++)
+			for (j = 0; j < 18; j += 2)
 			{
-				final[i][j] = line1[(j + shift[i]) % 9];
+				final[i][j] = line1[(j + shift[i]) % 18];
 			}
 		}
-
-		for (i = 0; i < 9; i++)//添加空格 和回车
-		{
-			for (j = 0; j < 9; j++)
-			{
-				final2[i][2 * j] = final[i][j];
-				//if (j == 8)final2[i][2 * j + 1] = '\n';
-				if (j < 8) final2[i][2 * j + 1] = ' ';
-			}
-		}
-
 
 		//在一个终局的基础上改变4-6,7-9行的输出顺序即可
 		for (i = 0; i < 6; i++)
@@ -64,38 +69,39 @@ void sudoku_generate(int n)
 				flag++;
 				for (k = 0; k < 3; k++)//前三行
 				{
-					/*for (int t = 0; t < 9; t++)
-					{
-					if (t)putchar(' ');
-					putchar(final[k][t]);
-					}putchar('\n');*/
-					puts(final2[k]);
+
+					puts(final[k]);
+					//fputs(final[k], fp);
 				}
 
 				for (k = 0; k < 3; k++)
 				{
-					/*for (int t = 0; t < 9; t++)
-					{
-					if (t)putchar(' ');
-					putchar(final[pos1[i][k]][t]);
-					}putchar('\n');*/
-					puts(final2[pos1[i][k]]);
+
+					puts(final[pos1[i][k]]);
+					//fputs(final[pos1[i][k]],fp);
 				}
 				for (k = 0; k < 3; k++)
 				{
-					/*for (int t = 0; t < 9; t++)
+
+
+					if (n == 1 && k == 2)
 					{
-					if (t)putchar(' ');
-					putchar(final[pos2[j][k]][t]);
-					}putchar('\n');*/
-					puts(final2[pos2[j][k]]);
+						for (int t = 0; t < 17; t++)
+							putchar(final[pos2[j][k]][t]);
+						//fputs(final[pos2[j][k]][t],fp)
+					}
+					else
+					{
+						puts(final[pos2[j][k]]);
+						//fputs(final[pos2[j][k]], fp);
+					}
 				}
 				n--;
 				if (!n) { return; }
 			}
 		}
 
-	} while (next_permutation(line1 + 1, line1 + 9));
+	} while (next_permutation(line + 1, line + 9));
 }
 
 
@@ -282,8 +288,3 @@ int main(int argc, char** argv)
 	system("pause");
 	return 0;
 }
-
-
-
-
-
