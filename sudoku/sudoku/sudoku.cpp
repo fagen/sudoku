@@ -1,3 +1,5 @@
+////////7s-8s
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
@@ -18,9 +20,18 @@ void sudoku_generate(int n)
 	int shift[9] = { 0,3,6,1,4,7,2,5,8 };
 	int pos[10] = { 0,1,2,3,4,5,6,7,8,9 };//行的输出顺序
 
+	int pos1[6][3] = { { 3,4,5 },{ 3,5,4 },{ 4,5,3 },{ 4,3,5 },{ 5,4,3 },{ 5,3,4 } };
+	int pos2[6][3] = { { 6,7,8 },{ 6,8,7 },{ 7,6,8 },{ 7,8,6 },{ 8,6,7 },{ 8,7,6 } };
+
 	char final[9][9];
+	char final2[9][18];
 	int i, j, k;
 	int flag = 0;
+
+	for (i = 0; i < 9; i++)//末尾加一个\0
+	{
+		final2[i][17] = '\0';
+	}
 	freopen(SUDOKUPATH, "w", stdout);
 	do//生成第一行
 	{
@@ -33,35 +44,56 @@ void sudoku_generate(int n)
 			}
 		}
 
-		//在一个终局的基础上改变4-6,7-9行的输出顺序即可
-		do
+		for (i = 0; i < 9; i++)//添加空格 和回车
 		{
-			do
+			for (j = 0; j < 9; j++)
 			{
+				final2[i][2 * j] = final[i][j];
+				//if (j == 8)final2[i][2 * j + 1] = '\n';
+				if (j < 8) final2[i][2 * j + 1] = ' ';
+			}
+		}
 
-				if (flag)  putchar('\n');
+
+		//在一个终局的基础上改变4-6,7-9行的输出顺序即可
+		for (i = 0; i < 6; i++)
+		{
+			for (j = 0; j < 6; j++)
+			{
+				if (flag)putchar('\n');
 				flag++;
-				// printf("%d\n",flag);
-				for (i = 0; i < 9; i++)
+				for (k = 0; k < 3; k++)//前三行
 				{
-					//sprintf(str,"%c %c %c %c %c %c %c %c %c\n",final[i][0],
-					//	final[i][1], final[i][2], final[i][3], final[i][4], final[i][5], final[i][6], final[i][7], final[i][8]);
-					//puts(str);
-					//puts(final[i]);
-					for (j = 0; j < 9; j++)
+					/*for (int t = 0; t < 9; t++)
 					{
-						if (j != 0)putchar(' ');
-						putchar(final[pos[i]][j]);
-						//putchar(*(*(final + i) + j));
-					}putchar('\n');
+					if (t)putchar(' ');
+					putchar(final[k][t]);
+					}putchar('\n');*/
+					puts(final2[k]);
+				}
+
+				for (k = 0; k < 3; k++)
+				{
+					/*for (int t = 0; t < 9; t++)
+					{
+					if (t)putchar(' ');
+					putchar(final[pos1[i][k]][t]);
+					}putchar('\n');*/
+					puts(final2[pos1[i][k]]);
+				}
+				for (k = 0; k < 3; k++)
+				{
+					/*for (int t = 0; t < 9; t++)
+					{
+					if (t)putchar(' ');
+					putchar(final[pos2[j][k]][t]);
+					}putchar('\n');*/
+					puts(final2[pos2[j][k]]);
 				}
 				n--;
 				if (!n) { return; }
-
-
-			} while (next_permutation(pos + 6, pos + 9));
-
-		} while (next_permutation(pos + 3, pos + 6));
+			}
+		}
 
 	} while (next_permutation(line1 + 1, line1 + 9));
 }
@@ -250,3 +282,8 @@ int main(int argc, char** argv)
 	system("pause");
 	return 0;
 }
+
+
+
+
+
