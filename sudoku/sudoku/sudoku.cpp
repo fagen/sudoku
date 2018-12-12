@@ -1,6 +1,6 @@
 ////空格加入计算
-////5.2-5.5s
-////fputs
+////3.3-4s
+////fputs 将数独装换成一个长的字符串
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -13,12 +13,12 @@ using namespace std;
 #define QUESPATH "ques.txt"
 #define SOLUTIONPATH "solution.txt"
 int num = 0;
-int settle_flag = 1;
+int settle_flag = 0;
 char ques_board[9][9];
 
 void sudoku_generate(int n)
 {
-	char str[30];
+	//char str[30];
 	char line[9] = { '5','1','2','3','4','6','7','8','9' };
 	char line1[19] = { '5',' ','1', ' ' ,'2', ' ','3',' ','4', ' ','6',' ','7',' ','8',' ','9','\n','\0' };
 	int shift[9] = { 0,6,12,2,8,14,4,10,16 };
@@ -30,6 +30,7 @@ void sudoku_generate(int n)
 	char final[10][19];
 	int i, j, k;
 	int flag = 0;
+	char str[200];
 
 	for (int i = 0; i < 9; i++)//初始值置空格和\0
 	{
@@ -42,6 +43,7 @@ void sudoku_generate(int n)
 	}
 	final[9][0] = '\n';//第10行只有一个空行
 	final[9][1] = '\0';
+
 
 	//freopen(SUDOKUPATH, "w", stdout);
 	FILE *fp = fopen(SUDOKUPATH, "w");
@@ -66,37 +68,30 @@ void sudoku_generate(int n)
 		{
 			for (j = 0; j < 6; j++)
 			{
+				str[0] = '\0';
 				flag++;
 				for (k = 0; k < 3; k++)//前三行
 				{
-					fputs(final[k], fp);
-					//fclose(fp);
-					//return;
+					//fputs(final[k], fp);
+					strcat(str, final[k]);
 				}
 
 				for (k = 0; k < 3; k++)//3 4 5行
 				{
-					fputs(final[pos1[i][k]], fp);
+					//fputs(final[pos1[i][k]], fp);
+					strcat(str, final[pos1[i][k]]);
 				}
-				if (n > 1)
+				//if (n > 1)
+				//{
+				for (k = 0; k < 3; k++)
 				{
-					for (k = 0; k < 3; k++)
-					{
-						fputs(final[pos2[j][k]], fp);
-					}
-					fputs(final[9], fp);//输出回车
+					//fputs(final[pos2[j][k]], fp);
+					strcat(str, final[pos2[j][k]]);
 				}
-				else
-				{
-					for (k = 0; k < 2; k++)
-					{
-						fputs(final[pos2[j][k]], fp);
-					}
-					for (k = 0; k < 17; k++)
-					{
-						fputc(final[pos2[j][3]][k], fp);
-					}
-				}
+				//fputs(final[9], fp);//输出回车
+				strcat(str, final[9]);
+				if (n == 1)str[161] = '\0';
+				fputs(str, fp);
 				n--;
 				if (!n) { fclose(fp); return; }
 			}
@@ -209,7 +204,7 @@ int check(int m, int n)
 
 	//int sum = 0;
 	for (int c = i; c<i + 3; c++)
-		for (int d = j; j < j + 3; j++)
+		for (int d = j; d < j + 3; d++)
 		{
 			if (c != m && d != n && ques_board[m][n] == ques_board[c][d])return 0;
 		}
@@ -220,6 +215,8 @@ int check(int m, int n)
 
 void settle(int pos)
 {
+	//freopen("CON", "w", stdout);
+	printf("%d\n", pos);
 	if (pos == 81)
 	{
 		settle_flag = 1;
@@ -229,7 +226,7 @@ void settle(int pos)
 	i = pos / 9;
 	j = pos % 9;
 
-	if (ques_board[i][j] != '0')
+	if (ques_board[i][j] == '0')
 	{
 		for (k = 1; k <= 9; k++)
 		{
@@ -247,6 +244,7 @@ void settle(int pos)
 	{
 		settle(pos + 1);
 	}
+
 	if (settle_flag)return;
 }
 
@@ -259,9 +257,11 @@ void settle_ques()
 		for (int j = 0; j < 9; j++)
 		{
 			ques_board[i][j] = getchar();
+			getchar();
 		}
-		getchar();
+		//getchar();
 	}
+	freopen("CON", "w", stdout);
 	settle(0);
 	freopen(SOLUTIONPATH, "w", stdout);
 	for (int i = 0; i < 9; i++)
@@ -279,16 +279,23 @@ int main(int argc, char** argv)
 {
 
 	int begintime, endtime;
-	scanf("%d", &num);
+	//scanf("%d", &num);
+
+	//begintime = clock();
+	//sudoku_generate(num);
+	//endtime = clock();	//计时结束
+	//printf("\nRunning Time：%dms\n", endtime - begintime);
 	begintime = clock();
-	//freopen("test.txt","w",stdout);
-	sudoku_generate(num);
+	//sudoku_generate(num);
+	settle_ques();
 	endtime = clock();	//计时结束
-						//freopen("CON", "w", stdout);
+	freopen("CON", "w", stdout);
 	printf("\nRunning Time：%dms\n", endtime - begintime);
+
 	system("pause");
 	return 0;
 }
+
 
 
 
