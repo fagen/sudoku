@@ -18,7 +18,7 @@ void sudoku_generate(int n)
 	int flag = 0;
 	char str[200];
 
-	for (int i = 0; i < 9; i++)//³õÊ¼ÖµÖÃ¿Õ¸ñºÍ\0
+	for (int i = 0; i < 9; i++)//åˆå§‹å€¼ç½®ç©ºæ ¼å’Œ\0
 	{
 		for (int j = 0; j < 17; j++)
 		{
@@ -27,21 +27,21 @@ void sudoku_generate(int n)
 		final[i][17] = '\n';
 		final[i][18] = '\0';
 	}
-	final[9][0] = '\n';//µÚ10ĞĞÖ»ÓĞÒ»¸ö¿ÕĞĞ
+	final[9][0] = '\n';//ç¬¬10è¡Œåªæœ‰ä¸€ä¸ªç©ºè¡Œ
 	final[9][1] = '\0';
 
 
 	//freopen(SUDOKUPATH, "w", stdout);
-	FILE *fp = fopen(GENERATEPATH, "w");
+	FILE *fp = fopen(SUDOKUPATH, "w");
 
-	do//Éú³ÉµÚÒ»ĞĞ
+	do//ç”Ÿæˆç¬¬ä¸€è¡Œ
 	{
 		for (int i = 0; i < 9; i++)
 		{
 			line1[2 * i] = line[i];
 		}
 		memcpy(final[0], line1, sizeof(line1));
-		for (i = 1; i < 9; i++)//ÒÔµÚÒ»ĞĞÎª»ù´¡£¬Éú³ÉÒ»¸öÖÕ¾Ö
+		for (i = 1; i < 9; i++)//ä»¥ç¬¬ä¸€è¡Œä¸ºåŸºç¡€ï¼Œç”Ÿæˆä¸€ä¸ªç»ˆå±€
 		{
 			for (j = 0; j < 18; j += 2)
 			{
@@ -49,20 +49,20 @@ void sudoku_generate(int n)
 			}
 		}
 
-		//ÔÚÒ»¸öÖÕ¾ÖµÄ»ù´¡ÉÏ¸Ä±ä4-6,7-9ĞĞµÄÊä³öË³Ğò¼´¿É
+		//åœ¨ä¸€ä¸ªç»ˆå±€çš„åŸºç¡€ä¸Šæ”¹å˜4-6,7-9è¡Œçš„è¾“å‡ºé¡ºåºå³å¯
 		for (i = 0; i < 6; i++)
 		{
 			for (j = 0; j < 6; j++)
 			{
 				str[0] = '\0';
 				flag++;
-				for (k = 0; k < 3; k++)//Ç°ÈıĞĞ
+				for (k = 0; k < 3; k++)//å‰ä¸‰è¡Œ
 				{
 					//fputs(final[k], fp);
 					strcat(str, final[k]);
 				}
 
-				for (k = 0; k < 3; k++)//3 4 5ĞĞ
+				for (k = 0; k < 3; k++)//3 4 5è¡Œ
 				{
 					//fputs(final[pos1[i][k]], fp);
 					strcat(str, final[pos1[i][k]]);
@@ -74,7 +74,7 @@ void sudoku_generate(int n)
 					//fputs(final[pos2[j][k]], fp);
 					strcat(str, final[pos2[j][k]]);
 				}
-				//fputs(final[9], fp);//Êä³ö»Ø³µ
+				//fputs(final[9], fp);//è¾“å‡ºå›è½¦
 				strcat(str, final[9]);
 				if (n == 1)str[161] = '\0';
 				fputs(str, fp);
@@ -85,14 +85,14 @@ void sudoku_generate(int n)
 
 	} while (next_permutation(line + 1, line + 9));
 }
-void ques_genetate(int ques_num)
+void ques_generate(int ques_num)
 {
 
 	FILE *fpQues1;
 	FILE *fpBase1;
 	char str[200];
 
-	fpBase1 = fopen(BASEPATH, "r");
+	fpBase1 = fopen(SUDOKUPATH, "r");
 	fpQues1 = fopen(QUESPATH, "w");
 	ques_board[9][0] = '\n';
 	ques_board[9][1] = '\0';
@@ -109,16 +109,16 @@ void ques_genetate(int ques_num)
 		//int plus[9] = { 0,1,2,9,10,11,18,19,20 };
 		int plus[9] = { 0,2,4,18,20,22,36,38,40 };
 
-		for (int k = 0; k < 9; k++)//Ã¿¸ö3*3Ëæ»úÌÍ¿Õ2¸ö
+		for (int k = 0; k < 9; k++)//æ¯ä¸ª3*3éšæœºæç©º2ä¸ª
 		{
 
 			int i, j,
-				hole[2];//3*3ÀïÃæÌÍµÄÎ»ÖÃ
+				hole[2];//3*3é‡Œé¢æçš„ä½ç½®
 			hole[0] = rand() % 9;
 			//hole[1] *= 2;
 			hole[1] = rand() % 9;
 			//hole[2] *= 2;
-			while (hole[0] == hole[1])//·ÀÖ¹ÖØ¸´
+			while (hole[0] == hole[1])//é˜²æ­¢é‡å¤
 			{
 				hole[1] = rand() % 9;
 			}
@@ -132,9 +132,9 @@ void ques_genetate(int ques_num)
 			}
 		}
 
-		//ÒÑ¾­ÌÍ¿ÕÁË18¸ö
+		//å·²ç»æç©ºäº†18ä¸ª
 		int others;
-		others = 12 + rand() % 31;//ÔÙÌÍ12-41¸ö¾Í¿ÉÒÔÁË
+		others = 12 + rand() % 31;//å†æ12-41ä¸ªå°±å¯ä»¥äº†
 		while (others--)
 		{
 			int k = rand() % 81;
