@@ -1,0 +1,10 @@
+C:\belongings\C#\sudokuGame\sudokuGame\bin\Debug\sudokuGame.exe.config
+C:\belongings\C#\sudokuGame\sudokuGame\bin\Debug\sudokuGame.exe
+C:\belongings\C#\sudokuGame\sudokuGame\bin\Debug\sudokuGame.pdb
+C:\belongings\C#\sudokuGame\sudokuGame\obj\Debug\sudokuGame.csprojResolveAssemblyReference.cache
+C:\belongings\C#\sudokuGame\sudokuGame\obj\Debug\sudokuGame.Properties.Resources.resources
+C:\belongings\C#\sudokuGame\sudokuGame\obj\Debug\sudokuGame.csproj.GenerateResource.cache
+C:\belongings\C#\sudokuGame\sudokuGame\obj\Debug\sudokuGame.csproj.CoreCompileInputs.cache
+C:\belongings\C#\sudokuGame\sudokuGame\obj\Debug\sudokuGame.exe
+C:\belongings\C#\sudokuGame\sudokuGame\obj\Debug\sudokuGame.pdb
+C:\belongings\C#\sudokuGame\sudokuGame\obj\Debug\sudokuGame.sudoku宇宙超级无敌变态的数独游戏.resources
