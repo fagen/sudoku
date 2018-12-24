@@ -16,12 +16,12 @@ using namespace std;
 #define BASEPATH "sudokubase.txt"
 #define GENERATEPATH "generation.txt" 
 
+static char AbsolutePath[100] = { 0 };
 static char ques_board[10][20];
 
 extern void sudoku_generate(int n);
-extern void ques_genetate(int ques_num);
+extern void ques_generate(int ques_num);
 
 
 #endif // !GENERATORH
-
 
