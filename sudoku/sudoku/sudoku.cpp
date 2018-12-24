@@ -1,6 +1,6 @@
-////¿Õ¸ñ¼ÓÈë¼ÆËã
+////ç©ºæ ¼åŠ å…¥è®¡ç®—
 ////3.3-4s
-////fputs ½«Êı¶À×°»»³ÉÒ»¸ö³¤µÄ×Ö·û´®
+////fputs å°†æ•°ç‹¬è£…æ¢æˆä¸€ä¸ªé•¿çš„å­—ç¬¦ä¸²
 
 #include"generator.h"
 static int num = 0;
@@ -21,7 +21,7 @@ static int settle_flag = 0;
 //	int flag = 0;
 //	char str[200];
 //
-//	for (int i = 0; i < 9; i++)//³õÊ¼ÖµÖÃ¿Õ¸ñºÍ\0
+//	for (int i = 0; i < 9; i++)//åˆå§‹å€¼ç½®ç©ºæ ¼å’Œ\0
 //	{
 //		for (int j = 0; j < 17; j++)
 //		{
@@ -30,21 +30,21 @@ static int settle_flag = 0;
 //		final[i][17] = '\n';
 //		final[i][18] = '\0';
 //	}
-//	final[9][0] = '\n';//µÚ10ĞĞÖ»ÓĞÒ»¸ö¿ÕĞĞ
+//	final[9][0] = '\n';//ç¬¬10è¡Œåªæœ‰ä¸€ä¸ªç©ºè¡Œ
 //	final[9][1] = '\0';
 //
 //
 //	//freopen(SUDOKUPATH, "w", stdout);
 //	FILE *fp = fopen(GENERATEPATH, "w");
 //
-//	do//Éú³ÉµÚÒ»ĞĞ
+//	do//ç”Ÿæˆç¬¬ä¸€è¡Œ
 //	{
 //		for (int i = 0; i < 9; i++)
 //		{
 //			line1[2 * i] = line[i];
 //		}
 //		memcpy(final[0], line1, sizeof(line1));
-//		for (i = 1; i < 9; i++)//ÒÔµÚÒ»ĞĞÎª»ù´¡£¬Éú³ÉÒ»¸öÖÕ¾Ö
+//		for (i = 1; i < 9; i++)//ä»¥ç¬¬ä¸€è¡Œä¸ºåŸºç¡€ï¼Œç”Ÿæˆä¸€ä¸ªç»ˆå±€
 //		{
 //			for (j = 0; j < 18; j += 2)
 //			{
@@ -52,20 +52,20 @@ static int settle_flag = 0;
 //			}
 //		}
 //
-//		//ÔÚÒ»¸öÖÕ¾ÖµÄ»ù´¡ÉÏ¸Ä±ä4-6,7-9ĞĞµÄÊä³öË³Ğò¼´¿É
+//		//åœ¨ä¸€ä¸ªç»ˆå±€çš„åŸºç¡€ä¸Šæ”¹å˜4-6,7-9è¡Œçš„è¾“å‡ºé¡ºåºå³å¯
 //		for (i = 0; i < 6; i++)
 //		{
 //			for (j = 0; j < 6; j++)
 //			{
 //				str[0] = '\0';
 //				flag++;
-//				for (k = 0; k < 3; k++)//Ç°ÈıĞĞ
+//				for (k = 0; k < 3; k++)//å‰ä¸‰è¡Œ
 //				{
 //					//fputs(final[k], fp);
 //					strcat(str, final[k]);
 //				}
 //
-//				for (k = 0; k < 3; k++)//3 4 5ĞĞ
+//				for (k = 0; k < 3; k++)//3 4 5è¡Œ
 //				{
 //					//fputs(final[pos1[i][k]], fp);
 //					strcat(str, final[pos1[i][k]]);
@@ -77,7 +77,7 @@ static int settle_flag = 0;
 //					//fputs(final[pos2[j][k]], fp);
 //					strcat(str, final[pos2[j][k]]);
 //				}
-//				//fputs(final[9], fp);//Êä³ö»Ø³µ
+//				//fputs(final[9], fp);//è¾“å‡ºå›è½¦
 //				strcat(str, final[9]);
 //				if (n == 1)str[161] = '\0';
 //				fputs(str, fp);
@@ -114,16 +114,16 @@ static int settle_flag = 0;
 //		//int plus[9] = { 0,1,2,9,10,11,18,19,20 };
 //		int plus[9] = { 0,2,4,18,20,22,36,38,40 };
 //
-//		for (int k = 0; k < 9; k++)//Ã¿¸ö3*3Ëæ»úÌÍ¿Õ2¸ö
+//		for (int k = 0; k < 9; k++)//æ¯ä¸ª3*3éšæœºæç©º2ä¸ª
 //		{
 //
 //			int i, j,
-//				hole[2];//3*3ÀïÃæÌÍµÄÎ»ÖÃ
+//				hole[2];//3*3é‡Œé¢æçš„ä½ç½®
 //			hole[0] = rand() % 9;
 //			//hole[1] *= 2;
 //			hole[1] = rand() % 9;
 //			//hole[2] *= 2;
-//			while (hole[0] == hole[1])//·ÀÖ¹ÖØ¸´
+//			while (hole[0] == hole[1])//é˜²æ­¢é‡å¤
 //			{
 //				hole[1] = rand() % 9;
 //			}
@@ -137,9 +137,9 @@ static int settle_flag = 0;
 //			}
 //		}
 //
-//		//ÒÑ¾­ÌÍ¿ÕÁË18¸ö
+//		//å·²ç»æç©ºäº†18ä¸ª
 //		int others;
-//		others = 12 + rand() % 31;//ÔÙÌÍ12-41¸ö¾Í¿ÉÒÔÁË
+//		others = 12 + rand() % 31;//å†æ12-41ä¸ªå°±å¯ä»¥äº†
 //		while (others--)
 //		{
 //			int k = rand() % 81;
@@ -169,25 +169,25 @@ int check(int m, int n)
 	j = n;
 	for (k = 0; k < 18; k+=2)
 	{
-		if (k != j)//ÅĞ¶ÏĞĞÊÇ·ñÂú×ã
+		if (k != j)//åˆ¤æ–­è¡Œæ˜¯å¦æ»¡è¶³
 		{
 			if (ques_board[i][j] == ques_board[i][k])return 0;
 		}
-		if (k != i)//ÅĞ¶ÏÁĞÊÇ·ñÂú×ã
+		if (k != i)//åˆ¤æ–­åˆ—æ˜¯å¦æ»¡è¶³
 		{
 			if (ques_board[i][j] == ques_board[k][j])return 0;
 		}
 	}
-	if (m / 6 == 0)i = 0;
-	else if (m / 6 == 1)i = 6;
-	else i = 12;
+	if (m / 3 == 0)i = 0;
+	else if (m / 3 == 1)i = 3;
+	else i = 6;
 
 	if (n / 6 == 0)j = 0;
 	else if (n / 6 == 1)j = 6;
 	else j = 12;
 
 	//int sum = 0;
-	for (int c = i; c<i + 6; c+=2)
+	for (int c = i; c<i + 3; c++)
 		for (int d = j; d < j + 6; d+=2)
 		{
 			if (c != m && d != n && ques_board[m][n] == ques_board[c][d])return 0;
@@ -197,11 +197,11 @@ int check(int m, int n)
 
 void prune(int i, int j, bool point[10])
 {
-	for (int k = 0; k < 18; k+=2)//ĞĞÅÅ³ı
+	for (int k = 0; k < 18; k+=2)//è¡Œæ’é™¤
 	{
 		if (ques_board[i][k] != '0'&&k != j)point[ques_board[i][k] - '0'] = true;
 	}
-	for (int k = 0; k < 9; k++)//ÁĞÅÅ³ı
+	for (int k = 0; k < 9; k++)//åˆ—æ’é™¤
 	{
 		if (ques_board[k][j] != '0'&&k != i)point[ques_board[k][j] - '0'] = true;
 	}
@@ -282,7 +282,7 @@ void settle_ques()
 			fgets(ques_board[i], 20, fpQues);
 
 		}
-		flag = fgetc(fpQues);//¶ÁÈ¡ÖĞ¼äµÄ¿ÕĞĞ£¬ÅĞ¶ÏÊÇ·ñÎÄ¼şÎ²
+		flag = fgetc(fpQues);//è¯»å–ä¸­é—´çš„ç©ºè¡Œï¼Œåˆ¤æ–­æ˜¯å¦æ–‡ä»¶å°¾
 		
 		begin = clock();
 		settle_flag = 0;
@@ -319,10 +319,10 @@ int main(int argc, char** argv)
 	//sudoku_generate(num);
 	settle_ques();
 	//ques_genetate(num);
-	endtime = clock();	//¼ÆÊ±½áÊø
+	endtime = clock();	//è®¡æ—¶ç»“æŸ
 	//freopen("CON", "w", stdout);
 	printf("total time: %d\n",total);
-	printf("\nRunning Time£º%dms\n", endtime - begintime);
+	printf("\nRunning Timeï¼š%dms\n", endtime - begintime);
 
 	system("pause");
 	return 0;
