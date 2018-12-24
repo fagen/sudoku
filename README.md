@@ -1,5 +1,10 @@
 # sudoku
+sudoku文件夹是命令程序项目的源代码项目
+
+sudokuGame文件夹是C#GUI程序的源代码项目
+
 Bin文件夹和Resource文件夹只是最终版的文件
+
 带commit注释信息的文件在sudoku文件夹中
 
 数独终局游戏
