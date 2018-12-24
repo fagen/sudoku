@@ -204,7 +204,7 @@ namespace sudokuGame
                     cgrid[finished[c][d]-'0']++;
 
                 }
-                for(int j=0;j<9;j++)
+                for(int j=1;j<=9;j++)
                 {
                     if (crow[j] == 0 || crow[j] > 1) { WrongAnswerWarning(); return; }
                     if (ccol[j] == 0 || ccol[j] > 1) { WrongAnswerWarning(); return; }
