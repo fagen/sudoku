@@ -1,9 +1,14 @@
 
 
 #include"generator.h"
+static char buf[MAX];
+
 
 void sudoku_generate(int n)
 {
+	int cot = n;
+	buf[0] = '\0';
+	int bit = 0;
 	//char str[30];
 	char line[9] = { '5','1','2','3','4','6','7','8','9' };
 	char line1[19] = { '5',' ','1', ' ' ,'2', ' ','3',' ','4', ' ','6',' ','7',' ','8',' ','9','\n','\0' };
@@ -59,25 +64,42 @@ void sudoku_generate(int n)
 				for (k = 0; k < 3; k++)//前三行
 				{
 					//fputs(final[k], fp);
-					strcat(str, final[k]);
+					//strcat(str, final[k]);
+					strcpy(buf + bit, final[k]);
+					bit += 18;
+					
 				}
 
 				for (k = 0; k < 3; k++)//3 4 5行
 				{
 					//fputs(final[pos1[i][k]], fp);
-					strcat(str, final[pos1[i][k]]);
+					//strcat(str, final[pos1[i][k]]);
+					strcpy(buf + bit, final[pos1[i][k]]);
+					bit += 18;
 				}
 				//if (n > 1)
 				//{
-				for (k = 0; k < 3; k++)
+				for (k = 0; k < 3; k++)//6 7 8行
 				{
 					//fputs(final[pos2[j][k]], fp);
-					strcat(str, final[pos2[j][k]]);
+					//strcat(str, final[pos2[j][k]]);
+					strcpy(buf + bit, final[pos2[j][k]]);
+					bit += 18;
 				}
 				//fputs(final[9], fp);//输出回车
-				strcat(str, final[9]);
-				if (n == 1)str[161] = '\0';
-				fputs(str, fp);
+				//strcat(str, final[9]);
+				strcpy(buf + bit, "\n");
+				bit++;
+
+				//if (n == 1)str[161] = '\0';
+				//fputs(str, fp);
+
+				if (n == 1)
+				{
+					buf[163 * (cot - 1) + 161] = '\0';
+					fputs(buf, fp);
+				}
+				
 				n--;
 				if (!n) { fclose(fp); return; }
 			}
